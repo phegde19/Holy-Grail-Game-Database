@@ -11,7 +11,7 @@ function Header() {
   useEffect(() => {
     console.log("Theme", theme);
   }, []);
-
+  
   return (
     <div className="w-full items-center p-3 flex">
       <Sidebar/>
