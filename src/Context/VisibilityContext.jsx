@@ -6,7 +6,7 @@ export const VisibilityProvider = ({ children }) => {
   const [visible, setVisible] = useState(true);
 
   const toggleVisibility = () => {
-    setVisible(!visible);
+    setVisible(preVisible => !preVisible);
   };
 
   return (

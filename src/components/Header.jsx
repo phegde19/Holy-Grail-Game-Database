@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import logo from "./../assets/Images/placeholder-logo.jpg";
 import { HiOutlineMagnifyingGlass, HiQueueList } from "react-icons/hi2";
 import { GiMoonBats, GiBarbedSun } from "react-icons/gi";
 import { ThemeContext } from "../Context/ThemeContext";
-import Sidebar from "../Context/SideBar";
+import placeholder from "../assets/Images/placeholder-logo.jpg";
 
 function Header() {
-  const [toggle, setToggle] = useState(true);
   const { theme, setTheme } = useContext(ThemeContext);
   useEffect(() => {
     console.log("Theme", theme);
@@ -14,7 +12,7 @@ function Header() {
   
   return (
     <div className="w-full items-center p-3 flex">
-      <Sidebar/>
+      <img src={placeholder} className="w-[50px] h-[50px] rounded-full" /> 
       <div
         className="flex bg-slate-200 p-2 w-screen 
         mx-5 rounded-full items-center">

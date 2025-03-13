@@ -2,9 +2,9 @@ import React, { useEffect, useState, useContext} from 'react'
 import GlobalApi from '../Services/GlobalApi';
 import { VisibilityContext } from '../Context/VisibilityContext'; 
 function GenreList(){
-    const { visible } = useContext(VisibilityContext)
-    const[genreList,setGenreList] = useState([])
-    const[activeIndex,setActiveIndex] = useState(0)
+    const { visible } = useContext(VisibilityContext);
+    const[genreList,setGenreList] = useState([]);
+    const[activeIndex,setActiveIndex] = useState(0);
     
     useEffect(()=>{
         getGenreList();
@@ -18,11 +18,12 @@ function GenreList(){
     console.log('GenreList rendered');
   return (
     <div>
-        <h2 className='text-[30px] font-bold dark:text-white flex'>Genre</h2>
         {visible && (
             <>
+                <h2 className='text-[30px] font-bold dark:text-white flex'>Genre</h2>
                 {genreList.map((item,index)=>(
                     <div
+                    key={item.id}
                     onClick={()=>setActiveIndex(index)} 
                     className={`flex gap-2 items-center mb-2 cursor-pointer
                     hover:bg-gray-400 p-3 group rounded-lg hover:dark:bg-gray-700

@@ -8,7 +8,7 @@ const Sidebar = () => {
   return (
     <HiQueueList
       onClick={toggleVisibility}
-      className='px-1 text-[45px] cursor-pointer hover:bg-gray-300 rounded-full p-2'
+      className='px-1 text-[45px] cursor-pointer hover:bg-gray-300 rounded-full p-2 dark:bg-white'
     />
   );
 };
