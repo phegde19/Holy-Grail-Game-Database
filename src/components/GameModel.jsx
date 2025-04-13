@@ -44,7 +44,7 @@ const GameModel = ({ gameId, onClose }) => {
 
         {game.rating && (
           <p className="mt-2 dark:text-white">
-            <strong>Rating:</strong> {game.rating} / {game.rating_top}
+            <strong>Rating:</strong> {game.rating} / 4
           </p>
         )}
 
@@ -63,12 +63,6 @@ const GameModel = ({ gameId, onClose }) => {
         {game.platforms?.length > 0 && (
           <p className="dark:text-white">
             <strong>Platforms:</strong> {game.platforms.map(p => p.platform.name).join(', ')}
-          </p>
-        )}
-
-        {game.developers?.length > 0 && (
-          <p className="dark:text-white">
-            <strong>Developers:</strong> {game.developers.map(dev => dev.name).join(', ')}
           </p>
         )}
 
