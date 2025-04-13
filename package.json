@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "collect" : "node ./src/Services/CollectData.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
@@ -29,5 +30,16 @@
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",
     "vite": "^6.1.0"
-  }
+  },
+  "Collector" :{
+      "name": "data-collector",
+      "version" : "1.0.0",
+      "description": "A simple data collector",
+      "main": "CollectData.js",
+      "dependencies": {
+        "axios": "^1.7.9"
+      }
+    }
+  
+
 }
