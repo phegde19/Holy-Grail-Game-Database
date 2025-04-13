@@ -5,7 +5,7 @@ import { ThemeContext } from "../Context/ThemeContext";
 import placeholder from "../assets/Images/placeholder-logo.jpg";
 import { HiMenu } from "react-icons/hi";
 import { VisibilityContext } from "../Context/VisibilityContext";
-import GlobalApi from "../Services/GlobalApi";
+import { searchGames } from "../Services/GameAPI";
 
 function Header({onSearchResults}) {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -18,15 +18,16 @@ function Header({onSearchResults}) {
   const handleSearch = (e) => {
     const searchValue = e.target.value;
     setSearchValue(searchValue);
-
+  
     if (searchValue.length > 2) {
-      GlobalApi.searchGame(searchValue).then((resp) => {
-        onSearchResults(resp.data.results); 
-  });
+      searchGames(searchValue).then((results) => {
+        onSearchResults(results); // results = response.data.results already
+      });
     } else {
-      onSearchResults([]); // Clear results if search value is less than 3 characters
+      onSearchResults([]);
     }
   };
+  
 
   return (
     <div className="w-full items-center p-3 flex">
@@ -34,17 +35,26 @@ function Header({onSearchResults}) {
         className="text-[35px] cursor-pointer mr-3 dark:bg-slate-200 rounded-full p-1"
         onClick={toggleVisibility}
         />
-      <div
-        className="flex bg-slate-200 p-2 w-screen 
-        mx-5 rounded-full items-center">
-        <HiOutlineMagnifyingGlass />
-        <input
-          type="text"
-          placeholder="Search Games"
-          value={searchValue}
-          onChange={handleSearch}
-          className="px-2 dark:bg-transparent outline-none"
-        />
+          <div className="flex p-2 w-full mx-5 rounded-full items-center bg-gray-200 dark:bg-white shadow-md">
+          <HiOutlineMagnifyingGlass className="text-gray-600 dark:text-black" />
+          <form
+              onSubmit={(e) => {
+              e.preventDefault();
+            if (searchValue.length > 2) {
+              onSearchResults(searchValue);
+            } else {
+              onSearchResults([]);
+            }
+          }}
+          className="w-full">
+          <input
+            type="text"
+            placeholder="Search Games"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            className="w-full px-2 py-1 bg-transparent text-black dark:text-black placeholder-gray-500 outline-none"
+          />
+        </form>
       </div>
       <div>
         {theme == "light" ? (

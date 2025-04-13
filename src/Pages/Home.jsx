@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import GenreList from "../components/GenreList";
 import WelcomePage from "../components/WelcomePage";
-import GlobalApi from "../Services/GlobalApi";
+import { searchGames } from "../Services/GameAPI";
 import Banner from "../components/Banner";
 import Trending from "../components/Trending";
 import { VisibilityContext } from "../Context/VisibilityContext";
@@ -33,15 +33,18 @@ export default function Home() {
     });
   };
 
-  const getSearchResults = (name) => {
-    GlobalApi.searchGame(name).then((resp) => {
-      setSearchResults(resp.data.results);
-    });
-  }
+  const getSearchResults = async (name) => {
+    if (name.length > 2) {
+      const results = await searchGames(name);
+      setSearchResults(results);
+    } else {
+      setSearchResults([]); // Clear results if fewer than 3 characters
+    }
+  };  
 
   return (
     <div>
-       <Header onSearchResults={(onSearchResults) => getSearchResults(onSearchResults)}/>
+       <Header onSearchResults={getSearchResults} />
     <div className={`grid ${visible ? "grid-cols-4" : "grid-cols-1"}`}>
       {visible && (
         <div className="h-full px-2 hidden md:block">
@@ -56,9 +59,7 @@ export default function Home() {
           <WelcomePage />
         </div>
         {searchResults.length > 0 ? (
-          <DisplaySearch gameList={allGameList}
-          results={searchResults} 
-          />
+          <DisplaySearch gameList={searchResults}/>
         ) : allGameList?.length > 0 && gameListByGenre.length > 0 ? (
           <div>
             <Banner gameBanner={allGameList[0]} />
