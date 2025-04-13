@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import GenreList from "../components/GenreList";
 import WelcomePage from "../components/WelcomePage";
-import { searchGames } from "../Services/GameAPI";
+import { searchGames, getTrendingGames, getGamesByGenre } from "../Services/GameAPI";
 import Banner from "../components/Banner";
 import Trending from "../components/Trending";
 import { VisibilityContext } from "../Context/VisibilityContext";
@@ -18,19 +18,17 @@ export default function Home() {
   useEffect(() => {}, []);
   useEffect(() => {
     getALLGamesList();
-    getGameListByGenre(4);
+    getGameListByGenre("action");
   }, []);
 
-  const getALLGamesList = () => {
-    GlobalApi.getAllGames.then((resp) => {
-      setAllGameList(resp.data.results);
-    });
+  const getALLGamesList = async () => {
+    const results = await getTrendingGames(); // RAWG doesn't have "all games", trending is good here
+    setAllGameList(results);
   };
 
-  const getGameListByGenre = (id) => {
-    GlobalApi.getGameListByGenre(id).then((resp) => {
-      setGameListByGenre(resp.data.results);
-    });
+  const getGameListByGenre = async (slug) => {
+    const results = await getGamesByGenre(slug); // RAWG expects slug, like "action", not id like 4
+    setGameListByGenre(results);
   };
 
   const getSearchResults = async (name) => {
