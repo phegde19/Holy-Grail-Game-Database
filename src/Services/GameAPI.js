@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_KEY = 'ad236d8453e941128cb040276b5ecb1c';
-const BASE_URL = 'https://api.rawg.io/api';
+const API_KEY = import.meta.env.VITE_RAWG_API_KEY;
+const BASE_URL = '/api';
 
 export { API_KEY }; // Export the API_KEY if needed elsewhere
 
@@ -36,13 +36,16 @@ export const getTrendingGames = async () => {
 };
 
 export const searchGames = async (query) => {
-  const res = await axios.get(`${BASE_URL}/games`, {
-    params: {
-      key: API_KEY,
-      search: query,
-      page_size: 12,
-    },
-  });
+  const params = {
+    key: import.meta.env.VITE_RAWG_API_KEY,
+    search: query,
+    page_size: 12,
+  };
+
+  
+  console.log('🔍 searchGames() - Sending request with params:', params);
+
+  const res = await axios.get(`/api/games`, { params });
   return res.data.results;
 };
 
