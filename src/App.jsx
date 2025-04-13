@@ -7,7 +7,6 @@ import Home from './Pages/Home';
 import Header from './components/Header';
 import { ThemeContext } from './Context/ThemeContext';
 import { VisibilityProvider } from './Context/VisibilityContext';
-import GameDetails from './Pages/GameDetails';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -23,7 +22,6 @@ function App() {
         <div className={`${theme} ${theme == 'dark' ? 'bg-[#121212]' : null} min-h-[100vh]`}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/game/:id" element={<GameDetails />} />
           </Routes>
           <Home />
         </div>
