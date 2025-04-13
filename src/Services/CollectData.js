@@ -1,6 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
-import { API_KEY } from './GameAPI.js'; // Import the API_KEY from GameAPI.js
+
+const API_KEY = "d077aaadd5b44092ae033b141e2f09c7";
 
 async function fetchData() {
     try {
