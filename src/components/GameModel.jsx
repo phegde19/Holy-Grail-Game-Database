@@ -24,12 +24,85 @@ const GameModel = ({ gameId, onClose }) => {
         <button onClick={onClose} className="absolute top-2 right-3 text-xl font-bold text-gray-600 dark:text-white">
           ✕
         </button>
+
         <h2 className="text-2xl font-bold mb-2 dark:text-white">{game.name}</h2>
-        <img src={game.background_image} alt={game.name} className="rounded mb-4 w-full max-h-[300px] object-cover" />
-        <p className="dark:text-white" dangerouslySetInnerHTML={{ __html: game.description }}></p>
-        <p className="mt-2 dark:text-white"><strong>Rating:</strong> {game.rating} / {game.rating_top}</p>
-        <p className="dark:text-white"><strong>Genres:</strong> {game.genres.map(g => g.name).join(', ')}</p>
-        <p className="dark:text-white"><strong>Platforms:</strong> {game.platforms.map(p => p.platform.name).join(', ')}</p>
+
+        {game.background_image && (
+          <img
+            src={game.background_image}
+            alt={game.name}
+            className="rounded mb-4 w-full max-h-[300px] object-cover"
+          />
+        )}
+
+        {game.description && (
+          <p
+            className="dark:text-white"
+            dangerouslySetInnerHTML={{ __html: game.description }}
+          ></p>
+        )}
+
+        {game.rating && (
+          <p className="mt-2 dark:text-white">
+            <strong>Rating:</strong> {game.rating} / {game.rating_top}
+          </p>
+        )}
+
+        {game.released && (
+          <p className="dark:text-white">
+            <strong>Release Date:</strong> {game.released}
+          </p>
+        )}
+
+        {game.genres?.length > 0 && (
+          <p className="dark:text-white">
+            <strong>Genres:</strong> {game.genres.map(g => g.name).join(', ')}
+          </p>
+        )}
+
+        {game.platforms?.length > 0 && (
+          <p className="dark:text-white">
+            <strong>Platforms:</strong> {game.platforms.map(p => p.platform.name).join(', ')}
+          </p>
+        )}
+
+        {game.developers?.length > 0 && (
+          <p className="dark:text-white">
+            <strong>Developers:</strong> {game.developers.map(dev => dev.name).join(', ')}
+          </p>
+        )}
+
+        {game.publishers?.length > 0 && (
+          <p className="dark:text-white">
+            <strong>Publishers:</strong> {game.publishers.map(pub => pub.name).join(', ')}
+          </p>
+        )}
+
+        {game.metacritic && (
+          <p className="dark:text-white">
+            <strong>Metacritic Score:</strong> {game.metacritic}
+          </p>
+        )}
+
+        {game.esrb_rating?.name && (
+          <p className="dark:text-white">
+            <strong>ESRB Rating:</strong> {game.esrb_rating.name}
+          </p>
+        )}
+
+        {game.website && (
+          <p className="dark:text-white">
+            <strong>Website:</strong>{' '}
+            <a
+              href={game.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sky-400 hover:text-sky-300 underline transition-colors duration-200 !text-sky-400 dark:!text-sky-400"
+            >
+              Visit
+            </a>
+          </p>
+        )}
       </div>
     </div>
   );
