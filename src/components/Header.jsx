@@ -20,9 +20,11 @@ function Header({onSearchResults}) {
     const searchValue = e.target.value;
     setSearchValue(searchValue);
   
-    if (searchValue.length > 2) {
-      searchGames(searchValue).then((results) => {
+    if (searchValue.trim().length > 2) {
+      searchGames(searchValue.trim()).then((results) => {
         onSearchResults(results); // results = response.data.results already
+      }).catch((err) => {
+        console.error("Search failed:", err.message);
       });
     } else {
       onSearchResults([]);
