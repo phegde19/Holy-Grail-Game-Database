@@ -5,10 +5,11 @@ import Banner from '../components/Banner';
 import Trending from '../components/Trending';
 import DisplaySearch from '../components/DisplaySearch';
 import Header from '../components/Header';
+import AccountDropdown from '../components/AccountDropdown'; // ✅ new
 import { VisibilityContext } from '../Context/VisibilityContext';
 import { getTrendingGames, searchGames, getGamesByGenre } from '../Services/GameAPI';
 
-export default function Home() {
+export default function Home({ username = "Guest" }) {
   const [searchResults, setSearchResults] = useState([]);
   const [allGameList, setAllGameList] = useState([]);
   const [gameListByGenre, setGameListByGenre] = useState([]);
@@ -47,8 +48,17 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="relative">
+      {/* ✅ Top-right account dropdown */}
+      <div className="absolute top-4 right-4 z-50">
+        <AccountDropdown
+          username={username}
+          onLogout={() => window.location.reload()}
+        />
+      </div>
+
       <Header onSearchResults={getSearchResults} />
+
       <div className={`grid ${visible ? 'grid-cols-4' : 'grid-cols-1'}`}>
         {visible && (
           <div className="px-2 hidden md:block">
