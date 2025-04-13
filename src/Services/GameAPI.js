@@ -10,15 +10,16 @@ export const getGenres = async () => {
   return res.data.results;
 };
 
-export const getGamesByGenre = async (slug) => {
-  const res = await axios.get(`${BASE_URL}/games`, {
+export const getGamesByGenre = async (slug, filters = {}) => {
+  const response = await axios.get(`${BASE_URL}/games`, {
     params: {
       key: API_KEY,
       genres: slug,
       page_size: 20,
+      ...filters, // ← inject filters like esrb_rating, platforms, etc.
     },
   });
-  return res.data.results;
+  return response.data.results;
 };
 
 export const getTrendingGames = async () => {

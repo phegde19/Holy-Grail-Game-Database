@@ -3,7 +3,6 @@ import GenreList from '../components/GenreList';
 import WelcomePage from '../components/WelcomePage';
 import Banner from '../components/Banner';
 import Trending from '../components/Trending';
-import GamesbyGenre from '../components/GamesbyGenre';
 import DisplaySearch from '../components/DisplaySearch';
 import Header from '../components/Header';
 import { VisibilityContext } from '../Context/VisibilityContext';
@@ -65,9 +64,9 @@ export default function Home() {
           </div>
 
           {searchResults.length > 0 ? (
-            <DisplaySearch gameList={searchResults} />
+            <DisplaySearch gameList={searchResults} selectedGenre={null} />
           ) : gameListByGenre.length > 0 ? (
-            <DisplaySearch gameList={gameListByGenre} />
+            <DisplaySearch gameList={gameListByGenre} selectedGenre={selectedGenre} />
           ) : (
             <div>
               <Banner gameBanner={allGameList[0]} />
