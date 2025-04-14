@@ -44,7 +44,7 @@ const GameModel = ({ gameId, onClose }) => {
 
         {game.rating && (
           <p className="mt-2 dark:text-white">
-            <strong>Rating:</strong> {game.rating} / 4
+            <strong>Rating:</strong> {game.rating} / 5
           </p>
         )}
 

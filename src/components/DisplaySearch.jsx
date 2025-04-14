@@ -65,7 +65,7 @@ function DisplaySearch({ gameList, selectedGenre }) {
       </div>
 
       {/* Game Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5 px-2">
         {filteredGames.map((item) => (
           <div
             key={item.id}

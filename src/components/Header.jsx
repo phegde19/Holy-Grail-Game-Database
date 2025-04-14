@@ -42,13 +42,24 @@ function Header({onSearchResults}) {
     />
     <div className="flex bg-slate-200 p-2 w-full rounded-full items-center">
       <HiOutlineMagnifyingGlass />
-      <input
-        type="text"
-        placeholder="Search Games"
-        value={searchValue}
-        onChange={handleSearch}
-        className="px-2 dark:bg-transparent outline-none w-full"
-      />
+      <form
+              onSubmit={(e) => {
+              e.preventDefault();
+            if (searchValue.length > 2) {
+              onSearchResults(searchValue);
+            } else {
+              onSearchResults([]);
+            }
+          }}
+          className="w-full">
+          <input
+            type="text"
+            placeholder="Search Games"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            className="w-full px-2 py-1 bg-transparent text-black dark:text-black placeholder-gray-500 outline-none"
+          />
+        </form>
     </div>
   </div>
 
