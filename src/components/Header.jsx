@@ -97,7 +97,7 @@ function Header({onSearchResults, user, onLogout}) {
               <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-md shadow-lg z-50">
                 <ul className="py-1 text-sm">
                   <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer text-black dark:text-white">
-                    Profile
+                    <Link to="/profile" className="block w-full text-black dark:text-white">Profile</Link>
                   </li>
                   <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
                     <Link to="/lists" className="block w-full text-black dark:text-white">My Lists</Link>

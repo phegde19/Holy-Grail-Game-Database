@@ -7,6 +7,7 @@ import { ThemeContext } from './Context/ThemeContext';
 import { VisibilityProvider } from './Context/VisibilityContext';
 import { Routes, Route } from 'react-router-dom';
 import Lists from './Pages/Lists';
+import Profile from './Pages/Profile';
 
 function App() {
   const [theme, setTheme] = useState('dark');
@@ -25,6 +26,7 @@ function App() {
             {user ? (
               <Routes>
                 <Route path="/" element={<Home username={user} onLogout={() => setUser(null)} />} />
+                <Route path="/profile" element={<Profile user={user} />} />
                 <Route path="/lists" element={<Lists username={user} />} />
               </Routes>
             ) : (
