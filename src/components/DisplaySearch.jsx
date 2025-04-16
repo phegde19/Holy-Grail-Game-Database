@@ -2,20 +2,16 @@ import React, { useEffect, useState } from 'react';
 import GameModel from './GameModel';
 import { getGamesByGenre } from '../Services/GameAPI';
 
-function DisplaySearch({ gameList, selectedGenre }) {
+function DisplaySearch({ gameList, selectedGenre, onAddToList }) {
   const [filteredGames, setFilteredGames] = useState(gameList || []);
   const [selectedGameId, setSelectedGameId] = useState(null);
-
-  // Filter states
   const [selectedPlatform, setSelectedPlatform] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
-  
 
-  // ✅ Fetch filtered games whenever genre or filters change
   useEffect(() => {
     const fetchFilteredGames = async () => {
       if (!selectedGenre) {
-        setFilteredGames(gameList); // fallback for search results
+        setFilteredGames(gameList);
         return;
       }
 
@@ -25,28 +21,21 @@ function DisplaySearch({ gameList, selectedGenre }) {
 
       try {
         const results = await getGamesByGenre(selectedGenre, params);
-
-        let filtered = results;
-        
-
-        setFilteredGames(filtered);
+        setFilteredGames(results);
       } catch (err) {
         console.error('Filter fetch failed:', err);
       }
     };
 
     fetchFilteredGames();
-  }, [selectedGenre, selectedPlatform, selectedYear]);
+  }, [selectedGenre, selectedPlatform, selectedYear, gameList]);
 
-  // ✅ UI
   return (
     <div>
       <h1 className="text-blue-400 dark:text-purple-400 font-bold">Filtered Results</h1>
 
       {/* Filters */}
       <div className="flex flex-wrap gap-4 my-4">
-        
-
         <select onChange={(e) => setSelectedPlatform(e.target.value)} className="p-2 border rounded">
           <option value="">All Platforms</option>
           <option value="4">PC</option>
@@ -78,6 +67,26 @@ function DisplaySearch({ gameList, selectedGenre }) {
               className="w-full h-[270px] object-cover rounded-xl"
             />
             <h2 className="text-[20px] font-bold p-2 dark:text-white">{item.name}</h2>
+
+            {/* Add to List Dropdown */}
+            <select
+              onClick={(e) => e.stopPropagation()}
+              onChange={(e) => {
+                if (e.target.value !== '') {
+                  onAddToList(item, e.target.value);
+                  e.target.selectedIndex = 0; // reset dropdown
+                }
+              }}
+              className="m-2 p-1 text-sm rounded bg-white dark:bg-gray-800 text-black dark:text-white"
+              defaultValue=""
+            >
+              <option value="" disabled>+ Add to List</option>
+              <option value="favorites">Favorites</option>
+              <option value="playing">Playing</option>
+              <option value="completed">Completed</option>
+              <option value="wishlist">Wishlist</option>
+              <option value="played">Played</option>
+            </select>
           </div>
         ))}
       </div>

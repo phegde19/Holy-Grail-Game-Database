@@ -5,10 +5,10 @@ import Banner from '../components/Banner';
 import Trending from '../components/Trending';
 import DisplaySearch from '../components/DisplaySearch';
 import Header from '../components/Header';
-import AccountDropdown from '../components/AccountDropdown'; // ✅ new
 import { VisibilityContext } from '../Context/VisibilityContext';
 import { getTrendingGames, searchGames, getGamesByGenre } from '../Services/GameAPI';
-//changes
+import { getUserLists, saveUserLists } from '../utils/listStorage';
+
 export default function Home({ username, onLogout }) {
   const [searchResults, setSearchResults] = useState([]);
   const [allGameList, setAllGameList] = useState([]);
@@ -47,6 +47,21 @@ export default function Home({ username, onLogout }) {
     }
   };
 
+  const handleAddToList = (game, listType) => {
+    const lists = getUserLists(username);
+    if (!lists[listType]) {
+      console.error('List type does not exist:', listType);
+      return;
+    }
+    if (!lists[listType].some((g) => g.id === game.id)) {
+      lists[listType].push(game);
+      saveUserLists(username, lists);
+      alert(`${game.name} added to ${listType.charAt(0).toUpperCase() + listType.slice(1)}`);
+    } else {
+      alert(`${game.name} is already in your ${listType}`);
+    }
+  };
+
   return (
     <div>
       <Header
@@ -54,8 +69,6 @@ export default function Home({ username, onLogout }) {
         onSearchResults={getSearchResults}
         onLogout={onLogout}
       />
-
-      
 
       <div className={`grid ${visible ? 'grid-cols-4' : 'grid-cols-1'}`}>
         {visible && (
@@ -72,9 +85,17 @@ export default function Home({ username, onLogout }) {
           </div>
 
           {searchResults.length > 0 ? (
-            <DisplaySearch gameList={searchResults} selectedGenre={null} />
+            <DisplaySearch
+              gameList={searchResults}
+              selectedGenre={null}
+              onAddToList={handleAddToList}
+            />
           ) : gameListByGenre.length > 0 ? (
-            <DisplaySearch gameList={gameListByGenre} selectedGenre={selectedGenre} />
+            <DisplaySearch
+              gameList={gameListByGenre}
+              selectedGenre={selectedGenre}
+              onAddToList={handleAddToList}
+            />
           ) : (
             <div>
               <Banner gameBanner={allGameList[0]} />
