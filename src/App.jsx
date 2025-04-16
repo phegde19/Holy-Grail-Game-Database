@@ -8,6 +8,7 @@ import { VisibilityProvider } from './Context/VisibilityContext';
 import { Routes, Route } from 'react-router-dom';
 import Lists from './Pages/Lists';
 import Profile from './Pages/Profile';
+import Forum from './Pages/Forum';
 
 function App() {
   const [theme, setTheme] = useState('dark');
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/" element={<Home username={user} onLogout={() => setUser(null)} />} />
                 <Route path="/profile" element={<Profile user={user} />} />
                 <Route path="/lists" element={<Lists username={user} />} />
+                <Route path="/forum" element={<Forum username={user} />} />
               </Routes>
             ) : (
               <Login onLogin={(username) => setUser(username)} />
