@@ -8,12 +8,12 @@ import Header from '../components/Header';
 import AccountDropdown from '../components/AccountDropdown'; // ✅ new
 import { VisibilityContext } from '../Context/VisibilityContext';
 import { getTrendingGames, searchGames, getGamesByGenre } from '../Services/GameAPI';
-
-export default function Home({ username = "Guest" }) {
+//changes
+export default function Home({ username, onLogout }) {
   const [searchResults, setSearchResults] = useState([]);
   const [allGameList, setAllGameList] = useState([]);
   const [gameListByGenre, setGameListByGenre] = useState([]);
-  const [selectedGenre, setSelectedGenre] = useState(null);
+  const [selectedGenre, setSelectedGenre] = useState("null");
   const { visible } = useContext(VisibilityContext);
 
   useEffect(() => {
@@ -48,20 +48,18 @@ export default function Home({ username = "Guest" }) {
   };
 
   return (
-    <div className="relative">
-      {/* ✅ Top-right account dropdown */}
-      <div className="absolute top-4 right-4 z-50">
-        <AccountDropdown
-          username={username}
-          onLogout={() => window.location.reload()}
-        />
-      </div>
+    <div>
+      <Header
+        user={username}
+        onSearchResults={getSearchResults}
+        onLogout={onLogout}
+      />
 
-      <Header onSearchResults={getSearchResults} />
+      
 
       <div className={`grid ${visible ? 'grid-cols-4' : 'grid-cols-1'}`}>
         {visible && (
-          <div className="px-2 hidden md:block">
+          <div className="h-full px-2 hidden md:block">
             <GenreList
               onGenreSelect={handleGenreSelect}
               selectedGenre={selectedGenre}

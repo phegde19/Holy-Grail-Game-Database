@@ -21,7 +21,7 @@ function App() {
         <div className={`${theme} ${theme === 'dark' ? 'bg-[#121212]' : null} min-h-[100vh]`}>
           {/* ✅ Conditional rendering based on login */}
           {user ? (
-            <Home username={user} />
+            <Home username={user} onLogout={() =>setUser(null)}/>
           ) : (
             <Login onLogin={(username) => setUser(username)} />
           )}
