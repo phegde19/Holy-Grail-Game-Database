@@ -5,6 +5,8 @@ import Home from './Pages/Home';
 import Login from './components/Login'; // ✅ import Login component
 import { ThemeContext } from './Context/ThemeContext';
 import { VisibilityProvider } from './Context/VisibilityContext';
+import { Routes, Route } from 'react-router-dom';
+import Lists from './Pages/Lists';
 
 function App() {
   const [theme, setTheme] = useState('dark');
@@ -16,18 +18,22 @@ function App() {
   }, []);
 
   return (
-    <VisibilityProvider>
-      <ThemeContext.Provider value={{ theme, setTheme }}>
-        <div className={`${theme} ${theme === 'dark' ? 'bg-[#121212]' : null} min-h-[100vh]`}>
-          {/* ✅ Conditional rendering based on login */}
-          {user ? (
-            <Home username={user} onLogout={() =>setUser(null)}/>
-          ) : (
-            <Login onLogin={(username) => setUser(username)} />
-          )}
-        </div>
-      </ThemeContext.Provider>
-    </VisibilityProvider>
+    
+      <VisibilityProvider>
+        <ThemeContext.Provider value={{ theme, setTheme }}>
+          <div className={`${theme} ${theme === 'dark' ? 'bg-[#121212]' : null} min-h-[100vh]`}>
+            {user ? (
+              <Routes>
+                <Route path="/" element={<Home username={user} onLogout={() => setUser(null)} />} />
+                <Route path="/lists" element={<Lists username={user} />} />
+              </Routes>
+            ) : (
+              <Login onLogin={(username) => setUser(username)} />
+            )}
+          </div>
+        </ThemeContext.Provider>
+      </VisibilityProvider>
+    
   );
 }
 

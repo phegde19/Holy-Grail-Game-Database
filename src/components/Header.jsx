@@ -8,6 +8,7 @@ import { VisibilityContext } from "../Context/VisibilityContext";
 import { searchGames } from "../Services/GameAPI";
 //import { FaUserCircle } from "react-icons/fa";
 import { HiOutlineUserCircle } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 function Header({onSearchResults, user, onLogout}) {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -94,16 +95,16 @@ function Header({onSearchResults, user, onLogout}) {
 
             {dropdownOpen && (
               <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded-md shadow-lg z-50">
-                <ul className="py-1 text-sm text-gray-700 dark:text-white">
-                  <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                <ul className="py-1 text-sm">
+                  <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer text-black dark:text-white">
                     Profile
                   </li>
-                  <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
-                    My Lists
+                  <li className="px-4 py-2 hover:bg-gray-700 cursor-pointer">
+                    <Link to="/lists" className="block w-full text-black dark:text-white">My Lists</Link>
                   </li>
                   <li
                     onClick={onLogout}
-                    className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-red-500"
+                    className="px-4 py-2 hover:bg-gray-700 cursor-pointer text-red-500"
                   >
                     Logout
                   </li>
