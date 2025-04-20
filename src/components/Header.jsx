@@ -47,6 +47,12 @@ function Header({ onSearchResults, user, onLogout }) {
           >
             Community Forum
           </Link>
+          <Link
+            to="/recommendations"
+            className="text-blue-600 dark:text-purple-400 font-semibold hover:underline"
+          >
+            Recommended
+          </Link>      
         </div>
 
         {/* Theme Toggle + User */}
