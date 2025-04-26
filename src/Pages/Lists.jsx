@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUserLists, saveUserLists } from '../utils/listStorage'; // or Firestore functions
+import { getUserLists, saveUserLists, saveListToFirestore } from '../utils/listStorage';
 import { Link } from 'react-router-dom';
 
 function Lists({ username }) {
@@ -10,26 +10,40 @@ function Lists({ username }) {
     wishlist: [],
     played: []
   });
+  const [listPublicFlags, setListPublicFlags] = useState({}); // Track public/private per list
 
   useEffect(() => {
     async function fetchLists() {
       const lists = await getUserLists(username);
-      if (lists) {
-        setUserLists(lists);
-      }
+      setUserLists(lists);
     }
     fetchLists();
   }, [username]);
 
   const handleRemoveFromList = (listType, gameId) => {
-    const confirmed = window.confirm("Are you sure you want to remove this game?");
+    const confirmed = window.confirm("Are you sure you want to remove this game from your list?");
     if (!confirmed) return;
+
     const updatedList = userLists[listType].filter(game => game.id !== gameId);
     const updatedUserLists = { ...userLists, [listType]: updatedList };
     setUserLists(updatedUserLists);
+    saveUserLists(username, updatedUserLists); // Save locally
 
-    // ✅ Optional: Save back to Firestore
-    saveUserLists(username, updatedUserLists);
+    // If list was public, also update Firestore
+    if (listPublicFlags[listType]) {
+      saveListToFirestore(username, listType, updatedList, true);
+    }
+  };
+
+  const handleTogglePublic = async (listType) => {
+    const newPublicFlags = { ...listPublicFlags, [listType]: !listPublicFlags[listType] };
+    setListPublicFlags(newPublicFlags);
+
+    const isPublic = !listPublicFlags[listType];
+    const games = userLists[listType];
+
+    // Save this list with updated public/private flag
+    await saveListToFirestore(username, listType, games, isPublic);
   };
 
   const listTitles = {
@@ -52,9 +66,22 @@ function Lists({ username }) {
       {/* Display all lists */}
       {Object.keys(userLists).map((listType) => (
         <div key={listType} className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4 text-black-400 dark:text-white-300">
-            {listTitles[listType]}
-          </h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-semibold text-green-400 dark:text-green-300">
+              {listTitles[listType]}
+            </h2>
+            {/* Toggle Public/Private */}
+            <button
+              onClick={() => handleTogglePublic(listType)}
+              className={`px-3 py-1 rounded ${
+                listPublicFlags[listType]
+                  ? 'bg-green-500 hover:bg-green-600'
+                  : 'bg-gray-500 hover:bg-gray-600'
+              } text-white text-sm`}
+            >
+              {listPublicFlags[listType] ? 'Public' : 'Private'}
+            </button>
+          </div>
 
           {userLists[listType].length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -63,9 +90,9 @@ function Lists({ username }) {
                   <img
                     src={game.background_image}
                     alt={game.name}
-                    className="rounded mb-2 h-[100px] object-cover w-full"
+                    className="rounded mb-2 h-[150px] object-cover w-full"
                   />
-                  <h2 className="text-lg font-semibold">{game.name}</h2>
+                  <h2 className="text-base font-semibold">{game.name}</h2>
 
                   <button
                     onClick={() => handleRemoveFromList(listType, game.id)}
