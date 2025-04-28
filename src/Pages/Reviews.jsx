@@ -47,7 +47,7 @@ function Reviews({ username }) {
   return (
     <div className="p-6">
         <Link to="/" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-6 inline-block">
-        ← Back to Home
+        ← Home
       </Link>
       {/* Title */}
       <h1 className="text-3xl font-bold text-blue-500 mb-6">Game Reviews</h1>
@@ -94,7 +94,11 @@ function Reviews({ username }) {
             <h2 className="text-xl font-semibold">{review.gameName}</h2>
             <p className="text-sm text-gray-400 mb-2">by {review.username}</p>
             <p className="mb-2">{review.reviewText}</p>
-            <p className="text-yellow-400">Rating: {review.rating} ⭐</p>
+            <div className="flex items-center gap-1 text-yellow-400">
+              {Array(review.rating).fill(0).map((_, idx) => (
+                <span key={idx}>⭐</span>
+              ))}
+          </div>
           </div>
         ))}
       </div>

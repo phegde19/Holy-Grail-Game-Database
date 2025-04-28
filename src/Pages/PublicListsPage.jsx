@@ -25,7 +25,7 @@ const PublicListsPage = () => {
   return (
     <div className="p-6">
       <Link to="/" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-4 inline-block">
-        ← Back to Home
+        ← Home
       </Link>
       <h1 className="text-3xl font-bold mb-4 text-blue-500">Public Game Lists</h1>
       {publicLists.length === 0 ? (

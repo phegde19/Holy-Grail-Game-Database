@@ -56,9 +56,9 @@ function Lists({ username }) {
 
   return (
     <div className="p-6">
-      {/* Back to Home Button */}
+      {/* Home Button */}
       <Link to="/" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-6 inline-block">
-        ← Back to Home
+        ← Home
       </Link>
 
       <h1 className="text-3xl font-bold mb-6 text-blue-400 dark:text-white">My Lists</h1>

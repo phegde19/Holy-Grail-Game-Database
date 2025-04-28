@@ -62,7 +62,7 @@ function Profile({ user }) {
           onClick={() => navigate('/')}
           className="bg-gray-400 hover:bg-gray-500 text-white py-2 rounded font-semibold"
         >
-          Back to Home
+          Home
         </button>
       </div>
     </div>
