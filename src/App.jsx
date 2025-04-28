@@ -11,6 +11,7 @@ import Profile from './Pages/Profile';
 import Forum from './Pages/Forum';
 import Recommendations from './Pages/Recommendations';
 import PublicListsPage from './Pages/PublicListsPage';
+import Reviews from './Pages/Reviews';
 
 function App() {
   const [theme, setTheme] = useState('dark');
@@ -33,6 +34,7 @@ function App() {
               <Route path="/forum" element={<Forum username={user} />} />
               <Route path="/recommendations" element={<Recommendations username={user} />} />
               <Route path="/public-lists" element={<PublicListsPage/>} />
+              <Route path="/reviews" element={<Reviews username={user} />} />
             </Routes>
           ) : (
             <Login onLogin={(username) => setUser(username)} />

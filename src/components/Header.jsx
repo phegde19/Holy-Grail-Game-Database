@@ -56,6 +56,9 @@ function Header({ onSearchResults, user, onLogout }) {
           <Link to="/public-lists" className="text-white px-4 py-2 hover:underline">
             Public Lists
           </Link>
+          <Link to="/reviews" className="text-white hover:text-blue-400">
+            Reviews
+          </Link>
         </div>
 
         {/* Theme Toggle + User */}
