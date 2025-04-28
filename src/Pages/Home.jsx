@@ -14,17 +14,20 @@ export default function Home({ username, onLogout }) {
   const [allGameList, setAllGameList] = useState([]);
   const [gameListByGenre, setGameListByGenre] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState("null");
+  const [hasSearched, setHasSearched] = useState(false);  // ✅ New
   const { visible } = useContext(VisibilityContext);
 
   useEffect(() => {
     getAllGames();
-    getGameListByGenre('action');
-    setSelectedGenre('action');
+    
   }, []);
 
   const getAllGames = async () => {
     const games = await getTrendingGames();
-    setAllGameList(games);
+    const filteredGames = games.filter(game => 
+      game.name.toLowerCase() !== "hazumi and the pregnation"
+    );
+    setAllGameList(filteredGames);
   };
 
   const getGameListByGenre = async (slug) => {
@@ -36,14 +39,17 @@ export default function Home({ username, onLogout }) {
     setSelectedGenre(slug);
     getGameListByGenre(slug);
     setSearchResults([]);
+    setHasSearched(false);  // ✅ Reset search mode
   };
 
   const getSearchResults = async (query) => {
     if (query.length > 2) {
       const results = await searchGames(query);
       setSearchResults(results);
+      setHasSearched(true);  // ✅ User typed something
     } else {
       setSearchResults([]);
+      setHasSearched(false);  // ✅ Reset if no valid search
     }
   };
 
@@ -70,38 +76,39 @@ export default function Home({ username, onLogout }) {
         onLogout={onLogout}
       />
 
-      <div className={`grid ${visible ? 'grid-cols-4' : 'grid-cols-1'}`}>
+      <div className="flex">
         {visible && (
-          <div className="h-full px-2 hidden md:block">
+          <div className="h-full px-2 hidden md:block wd-90">
             <GenreList
               onGenreSelect={handleGenreSelect}
               selectedGenre={selectedGenre}
             />
           </div>
         )}
-        <div className={`${visible ? 'col-span-3' : 'col-span-1'}`}>
+        <div className="flex-1">
           <div className="text-center py-2">
             <WelcomePage />
           </div>
 
-          {searchResults.length > 0 ? (
-            <DisplaySearch
-              gameList={searchResults}
-              selectedGenre={null}
-              onAddToList={handleAddToList}
-            />
-          ) : gameListByGenre.length > 0 ? (
-            <DisplaySearch
-              gameList={gameListByGenre}
-              selectedGenre={selectedGenre}
-              onAddToList={handleAddToList}
-            />
-          ) : (
-            <div>
-              <Banner gameBanner={allGameList[0]} />
-              <Trending gameList={allGameList} />
-            </div>
-          )}
+          {hasSearched ? (
+  <DisplaySearch
+    gameList={searchResults}
+    selectedGenre={null}
+    onAddToList={handleAddToList}
+  />
+) : selectedGenre && gameListByGenre.length > 0 ? (
+  <DisplaySearch
+    gameList={gameListByGenre}
+    selectedGenre={selectedGenre}
+    onAddToList={handleAddToList}
+  />
+) : allGameList.length > 0 ? (
+  <div>
+    <Banner gameBanner={allGameList[0]} />
+    <Trending gameList={allGameList} />
+  </div>
+) : null}
+
         </div>
       </div>
     </div>

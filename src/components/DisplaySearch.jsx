@@ -32,7 +32,7 @@ function DisplaySearch({ gameList, selectedGenre, onAddToList }) {
 
   return (
     <div>
-      <h1 className="text-blue-400 dark:text-purple-400 font-bold">Filtered Results</h1>
+      <h1 className="text-center text-2xl text-blue-400 dark:text-purple-400 font-bold my-4">Search Results</h1>
 
       {/* Filters */}
       <div className="flex flex-wrap gap-4 my-4">
