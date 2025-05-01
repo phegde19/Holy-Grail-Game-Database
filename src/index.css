@@ -15,15 +15,6 @@
   -webkit-text-size-adjust: 100%; 
 }
 
-a {
-  font-weight: 500;
-  color: #000000;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #000000;
-}
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;

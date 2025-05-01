@@ -35,8 +35,8 @@ function DisplaySearch({ gameList, selectedGenre, onAddToList }) {
       <h1 className="text-center text-2xl text-blue-400 dark:text-purple-400 font-bold my-4">Search Results</h1>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-4 my-4">
-        <select onChange={(e) => setSelectedPlatform(e.target.value)} className="p-2 border rounded">
+      <div className="flex flex-wrap gap-4 my-4 dark:text-black">
+        <select onChange={(e) => setSelectedPlatform(e.target.value)} className="p-2 text-black bg-gray-400 dark:bg-gray-600 rounded">
           <option value="">All Platforms</option>
           <option value="4">PC</option>
           <option value="7">Nintendo Switch</option>
@@ -47,8 +47,8 @@ function DisplaySearch({ gameList, selectedGenre, onAddToList }) {
 
         <input
           type="number"
+          className="p-2 rounded bg-gray-400 text-black dark:text-slate-200 dark:bg-gray-600"
           placeholder="Year"
-          className="p-2 border rounded"
           onChange={(e) => setSelectedYear(e.target.value)}
         />
       </div>
@@ -59,7 +59,7 @@ function DisplaySearch({ gameList, selectedGenre, onAddToList }) {
           <div
             key={item.id}
             onClick={() => setSelectedGameId(item.id)}
-            className="bg-slate-500 rounded-lg group hover:scale-110 transition-all ease-in-out duration-300 cursor-pointer"
+            className="bg-gray-400 rounded-xl group hover:scale-110 transition-all ease-in-out duration-300 cursor-pointer border"
           >
             <img
               src={item.background_image}
@@ -77,7 +77,7 @@ function DisplaySearch({ gameList, selectedGenre, onAddToList }) {
                   e.target.selectedIndex = 0; // reset dropdown
                 }
               }}
-              className="m-2 p-1 text-sm rounded bg-white dark:bg-gray-800 text-black dark:text-white"
+              className="m-2 p-1 text-sm rounded bg-white dark:bg-gray-600 text-black dark:text-white border"
               defaultValue=""
             >
               <option value="" disabled>+ Add to List</option>
