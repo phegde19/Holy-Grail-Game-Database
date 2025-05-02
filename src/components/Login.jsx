@@ -1,7 +1,10 @@
+// written by: Pritam Hegde
+// tested by: Pritam Hegde
+// debugged by: Pritam Hegde
 import React, { useState } from 'react';
 import { db } from '../firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import placeholder from '../assets/Images/placeholder-logo.jpg'; // ✅ Import image
+import placeholder from '../assets/Images/placeholder-logo.jpg'; 
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState('');

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 function Banner({ gameBanner }) {
   useEffect(() => {}, []);
 
-  // ✅ Return nothing if gameBanner hasn't loaded yet
+  //Return nothing if gameBanner hasn't loaded yet
   if (!gameBanner) return null;
 
   return (

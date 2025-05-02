@@ -1,5 +1,8 @@
+// written by: Pritam Hegde
+// tested by: Pritam Hegde
+// debugged by: Pritam Hegde
 import React, { useState, useEffect } from 'react';
-import { createThread, fetchThreads, addReply } from '../Services/ForumService'; // We'll write this service next
+import { createThread, fetchThreads, addReply } from '../Services/ForumService'; 
 import { Link } from 'react-router-dom';
 
 function Forum({ username }) {

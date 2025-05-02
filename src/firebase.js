@@ -1,10 +1,11 @@
-// Import the functions you need from the SDKs you need
+// written by: Pritam Hegde
+// tested by: Pritam Hegde
+// debugged by: Pritam Hegde
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAZvPZ6zuqonifTvRJ-3LwGLJcBvvciCFo",
   authDomain: "gamedb-c53e1.firebaseapp.com",

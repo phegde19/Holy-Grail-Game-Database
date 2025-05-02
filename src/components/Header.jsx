@@ -1,3 +1,6 @@
+// written by: Pritam Hegde
+// tested by: Pritam Hegde
+// debugged by: Pritam Hegde
 import React, { useContext, useEffect, useState } from "react";
 import { HiOutlineMagnifyingGlass, HiQueueList } from "react-icons/hi2";
 import { GiMoonBats, GiBarbedSun } from "react-icons/gi";
@@ -40,7 +43,7 @@ function Header({ onSearchResults, user, onLogout }) {
             className="text-[35px] cursor-pointer dark:bg-slate-200 rounded-full p-1"
             onClick={toggleVisibility}
           />
-          {/* ✅ Forum Nav Link */}
+          {/* Forum Nav Link */}
           <Link
             to="/forum"
             className="text-blue-600 dark:text-purple-400 font-semibold hover:underline"

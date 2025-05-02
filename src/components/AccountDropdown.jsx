@@ -1,3 +1,7 @@
+// written by: Pritam Hegde
+// tested by: Pritam Hegde
+// debugged by: Pritam Hegde
+
 import React, { useState, useRef, useEffect } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 

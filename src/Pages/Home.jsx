@@ -14,7 +14,7 @@ export default function Home({ username, onLogout }) {
   const [allGameList, setAllGameList] = useState([]);
   const [gameListByGenre, setGameListByGenre] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState("null");
-  const [hasSearched, setHasSearched] = useState(false);  // ✅ New
+  const [hasSearched, setHasSearched] = useState(false);  
   const { visible } = useContext(VisibilityContext);
 
   useEffect(() => {
@@ -39,17 +39,16 @@ export default function Home({ username, onLogout }) {
     setSelectedGenre(slug);
     getGameListByGenre(slug);
     setSearchResults([]);
-    setHasSearched(false);  // ✅ Reset search mode
+    setHasSearched(false);  
   };
 
   const getSearchResults = async (query) => {
     if (query.length > 2) {
       const results = await searchGames(query);
       setSearchResults(results);
-      setHasSearched(true);  // ✅ User typed something
-    } else {
+      setHasSearched(true);  
       setSearchResults([]);
-      setHasSearched(false);  // ✅ Reset if no valid search
+      setHasSearched(false);  
     }
   };
 

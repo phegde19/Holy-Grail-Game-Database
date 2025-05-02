@@ -1,3 +1,6 @@
+// written by: Pritam Hegde
+// tested by: Pritam Hegde
+// debugged by: Pritam Hegde
 import axios from 'axios';
 
 const API_KEY = import.meta.env.VITE_RAWG_API_KEY;
