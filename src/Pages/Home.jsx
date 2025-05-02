@@ -105,7 +105,9 @@ export default function Home({ username, onLogout }) {
 ) : allGameList.length > 0 ? (
   <div>
     <Banner gameBanner={allGameList[0]} />
-    <Trending gameList={allGameList} />
+    <Trending 
+    gameList={allGameList} 
+    onAddToList={handleAddToList}/>
   </div>
 ) : null}
 
