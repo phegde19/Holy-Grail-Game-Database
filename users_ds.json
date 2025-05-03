@@ -1,0 +1,14 @@
+{
+    "username": "ds",
+    "email": "pg",
+    "location": "Dallas",
+    "createdAt": "2025-04-21T21:13:54.936Z",
+    "lists": {
+      "favorites": [],
+      "completed": [],
+      "played": [],
+      "playing": [],
+      "wishlist": []
+    }
+  }
+  
