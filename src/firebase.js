@@ -6,6 +6,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAZvPZ6zuqonifTvRJ-3LwGLJcBvvciCFo",
   authDomain: "gamedb-c53e1.firebaseapp.com",
