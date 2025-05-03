@@ -17,7 +17,11 @@ const Recommendations = ({ username }) => {
     const userGames = Object.values(userLists).flat();
 
     getTrendingGames().then(allGames => {
-      const results = generateRecommendations(userGames, allGames);
+      const unwantedTags = ['Nudity', 'Sexual Content'];
+      const filteredGames = allGames.filter(
+        (game) => !game.tags?.some((tags) => unwantedTags.includes(tags.name))
+      );
+      const results = generateRecommendations(userGames, filteredGames);
       setRecommended(results);
     });
   }, [username]);

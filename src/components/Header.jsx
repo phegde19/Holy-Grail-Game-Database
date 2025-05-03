@@ -56,10 +56,10 @@ function Header({ onSearchResults, user, onLogout }) {
           >
             Recommended
           </Link>      
-          <Link to="/public-lists" className="text-white px-4 py-2 hover:underline">
+          <Link to="/public-lists" className="text-blue-600 dark:text-purple-400 font-semibold px-4 py-2 hover:underline">
             Public Lists
           </Link>
-          <Link to="/reviews" className="text-white hover:text-blue-400">
+          <Link to="/reviews" className="text-blue-600 dark:text-purple-400 font-semibold hover:text-blue-400">
             Reviews
           </Link>
         </div>
@@ -122,7 +122,7 @@ function Header({ onSearchResults, user, onLogout }) {
       </div>
 
       {/* Search Bar */}
-      <div className="flex p-2 rounded-full items-center bg-gray-200 dark:bg-white shadow-md">
+      <div className="flex p-2 rounded-full items-center bg-gray-200 dark:bg-white shadow-md border">
         <HiOutlineMagnifyingGlass className="text-gray-600 dark:text-black" />
         <form
           onSubmit={(e) => {
