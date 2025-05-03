@@ -1,0 +1,19 @@
+[
+    {
+      "name": "FIFA 22",
+      "released": "2021-09-27",
+      "rating": 3.39,
+      "platforms": ["PC", "PlayStation 5", "Xbox One"],
+      "genres": ["Sports"],
+      "background_image": "https://media.rawg.io/media/games/355/355d2ec5d6b87518228dc30a9bb0e70d.jpg"
+    },
+    {
+      "name": "Red Dead Redemption 2",
+      "released": "2018-10-26",
+      "rating": 4.59,
+      "platforms": ["PC", "PlayStation 4", "Xbox One"],
+      "genres": ["Action", "Adventure"],
+      "background_image": "https://media.rawg.io/media/games/511/5118aff5091cb3efec399c808f8c598f.jpg"
+    }
+  ]
+  
