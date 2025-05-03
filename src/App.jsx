@@ -15,7 +15,7 @@ import Reviews from './Pages/Reviews';
 
 function App() {
   const [theme, setTheme] = useState('dark');
-  const [user, setUser] = useState(null); // ✅ Store the logged-in username
+  const [user, setUser] = useState(null); 
 
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
